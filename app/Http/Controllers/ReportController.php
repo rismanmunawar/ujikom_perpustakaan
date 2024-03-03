@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TransaksiKembali;
-use App\Models\TransaksiPinjam;
+use App\Models\PinjamModel;
+use App\Models\KembaliModel;
 use App\Models\Koleksi;
 use App\Models\Anggota;
 use Illuminate\Http\Request;
@@ -25,6 +25,47 @@ class ReportController extends Controller
         return $pdf->stream('users_report.pdf');
     }
 
+    public function ReportAnggota()
+    {
+        $anggotas = Anggota::all();
+
+        // Load PDF view
+        $pdf = PDF::loadView('report.anggotas_report', compact('anggotas'));
+        $pdf->setPaper('F4', 'landscape');
+        // Stream PDF untuk ditampilkan sebagai preview
+        return $pdf->stream('anggotas_report.pdf');
+    }
+
+    public function ReportKoleksi()
+    {
+        $koleksis = Koleksi::all();
+        // Load PDF view
+        $pdf = PDF::loadView('report.koleksis_report', compact('koleksis'));
+        $pdf->setPaper('F4', 'landscape');
+        // return $pdf->download('users_report.pdf');
+        return $pdf->stream('koleksis_report.pdf');
+    }
+
+    public function ReportPemijaman()
+    {
+        $pinjams = PinjamModel::all();
+        // Load PDF view
+        $pdf = PDF::loadView('report.pinjams_report', compact('pinjams'));
+        $pdf->setPaper('F4', 'landscape');
+        // return $pdf->download('users_report.pdf');
+        return $pdf->stream('pinjams_report.pdf');
+    }
+
+    public function ReportPengembalian()
+    {
+        $kembalis = KembaliModel::all();
+        // Load PDF view
+        $pdf = PDF::loadView('report.kembalis_report', compact('kembalis'));
+        $pdf->setPaper('F4', 'landscape');
+        // return $pdf->download('users_report.pdf');
+        return $pdf->stream('kembalis_report.pdf');
+    }
+
     public function index()
     {
         $data = [];
@@ -36,41 +77,32 @@ class ReportController extends Controller
      */
     public function create()
     {
-        $pinjams = TransaksiPinjam::All();
-        $koleksis = Koleksi::All();
-        $anggotas = Anggota::All();
-        return view('kembali/create', compact('koleksis', 'anggotas', 'pinjams'));
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(Request $request)
-    // {
+    public function store(Request $request)
+    {
 
-    //     $data = TransaksiKembali::with('anggota', 'pengguna')->whereBetween('tg_pinjam', [$request->tg_awal, $request->tg_akhir])->get()->toArray();
-    //     // return view('report/index', compact('data'));
-
-    //     $pdf = PDF::loadView('report/pdf', compact('data'));
-
-    //     return $pdf->stream('report.pdf');
-    // }
+        //
+    }
 
     /**
      * Display the specified resource.
      */
     public function show($trxPinjam)
     {
-        $pinjam = TransaksiPinjam::where('no_transaksi_pinjam', $trxPinjam)->first();
-        return response()->json($pinjam);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TransaksiKembali $kembalis)
+    public function edit($kembalis)
     {
-        return view('kembali.edit', compact('kembalis'));
+        //
     }
 
     /**
@@ -84,9 +116,8 @@ class ReportController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TransaksiKembali $kembali)
+    public function destroy($kembali)
     {
-        $kembali->delete();
-        return redirect()->route('kembalis.index')->with('success', 'Great! You have Successfully deleted transaksi');
+        //
     }
 }

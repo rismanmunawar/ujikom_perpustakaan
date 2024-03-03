@@ -8,11 +8,16 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-use App\Models\User;
 // use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
+
+use App\Models\User;
+use App\Models\Koleksi;
+use App\Models\PinjamModel;
+use App\Models\KembaliModel;
 
 class AuthController extends Controller
 {
@@ -44,14 +49,14 @@ class AuthController extends Controller
     public function postLogin(Request $request): RedirectResponse
     {
         $request->validate([
-            'email' => 'required',
+            'nm_pengguna' => 'required',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('nm_pengguna', 'password');
         if (Auth::attempt($credentials)) {
 
-            $user = User::where("email", $request->email)->first();
+            $user = User::where("nm_pengguna", $request->nm_pengguna)->first();
             $token = $user->createToken("API_TOKEN");
 
             session(['accessToken' => $token->plainTextToken]);
@@ -90,24 +95,26 @@ class AuthController extends Controller
      *
      * @return response()
      */
-    // public function dashboard()
-    // {
-    //     if (Auth::check()) {
-    //         return view('dashboard');
-    //     }
-
-    //     return redirect("login")->withSuccess('Opps! You do not have access');
-    // }
     public function dashboard()
     {
         $title = "Dashboard";
 
         if (Auth::check()) {
             $nm_pengguna = Auth::user()->nm_pengguna;
-            return view('dashboard', ['title' => $title, 'nm_pengguna' => $nm_pengguna]);
+            $totalUsers = User::count();
+            $totalKembali = KembaliModel::count();
+            $totalPinjam = PinjamModel::count();
+            $totalKoleksi = Koleksi::count();
+            return view('dashboard', compact(
+                'title',
+                'nm_pengguna',
+                'totalUsers',
+                'totalKembali',
+                'totalPinjam',
+                'totalKoleksi'
+            ));
         }
-
-        return redirect("login")->withSuccess('Opps! You do not have access');
+        return Redirect::to("login")->with('error', 'Opps! You do not have access');
     }
     /**
      * Write code on Method
@@ -134,7 +141,7 @@ class AuthController extends Controller
         Session::flush();
         Auth::logout();
 
-        return Redirect('login');
+        return Redirect('/');
     }
 
     public function handleLogin(Request $request)

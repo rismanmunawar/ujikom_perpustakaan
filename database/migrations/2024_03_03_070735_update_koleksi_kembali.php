@@ -14,18 +14,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('update_koleksi_status', function (Blueprint $table) {
+        Schema::create('update_koleksi_kembali_status', function (Blueprint $table) {
             $table->id();
-            // Kolom-kolom lainnya yang diperlukan oleh trigger
         });
 
         // Menambahkan pernyataan SQL untuk membuat trigger
         $triggerQuery = "
-        CREATE TRIGGER update_koleksi_status AFTER INSERT ON transaksi_pinjams
+        CREATE TRIGGER update_koleksi_kembali_status AFTER INSERT ON transaksi_kembalis
         FOR EACH ROW
         BEGIN
             UPDATE koleksis 
-            SET status = 'Dipinjam'
+            SET status = 'Tersedia'
             WHERE kd_koleksi = NEW.kd_koleksi;
         END;
         ";
@@ -39,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('update_koleksi_status');
+        Schema::dropIfExists('update_koleksi_kembali_status');
     }
 };

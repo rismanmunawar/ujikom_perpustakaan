@@ -50,10 +50,10 @@
                     <form action="{{ route('login.post') }}" method="POST">
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
-                            <input type="text" id="email_address" class="form-control form-control-xl" name="email"
-                                placeholder="Username" required autofocus>
-                            @if ($errors->has('email'))
-                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            <input type="text" id="nm_pengguna" class="form-control form-control-xl"
+                                name="nm_pengguna" placeholder="Username" required autofocus>
+                            @if ($errors->has('nm_pengguna'))
+                                <span class="text-danger">{{ $errors->first('nm_pengguna') }}</span>
                             @endif
                             <div class="form-control-icon">
                                 <i class="bi bi-person"></i>

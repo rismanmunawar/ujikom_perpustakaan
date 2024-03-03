@@ -40,4 +40,8 @@ Route::get('koleksi/showall', [KoleksiController::class, 'showAll'])->name('kole
 Route::resource('pinjams', PinjamController::class); //users.index, users.create, users.edit, users.update, users.destroy
 Route::resource('kembalis', KembaliController::class); //users.index, users.create, users.edit, users.update, users.destroy
 
-Route::get('reports', [ReportController::class, 'ReportUser'])->name('reports');
+Route::get('ports/users', [ReportController::class, 'ReportUser'])->name('users');
+Route::get('ports/anggotas', [ReportController::class, 'ReportAnggota'])->name('anggotas');
+Route::get('ports/koleksis', [ReportController::class, 'ReportKoleksi'])->name('koleksis');
+Route::get('ports/peminjaman', [ReportController::class, 'ReportPemijaman'])->name('peminjaman');
+Route::get('ports/pengembalian', [ReportController::class, 'ReportPengembalian'])->name('pengembalian');

@@ -42,7 +42,7 @@
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
-                {{-- @if (Auth::user()->hak_akses != 'admin')
+                @if (Auth::user()->hak_akses != 'admin')
                     <li class="sidebar-title">Transaksi</li>
                     <li class="sidebar-item  ">
                         <a href="dashboard" class='sidebar-link'>
@@ -76,8 +76,8 @@
                             <span>Logout</span>
                         </a>
                     </li>
-                @endif --}}
-                @if (Auth::user()->hak_akses != 'admin')
+                @endif
+                @if (Auth::user()->hak_akses != 'anggota')
                     <li class="sidebar-item  ">
                         <a href="dashboard" class='sidebar-link'>
                             <i class="bi bi-grid-fill"></i>
@@ -104,28 +104,7 @@
                             </li>
                         </ul>
                     </li>
-                    {{--  --}}
-                    <li class="sidebar-item  has-sub">
-                        <a href="#" class='sidebar-link'>
-                            <i class="bi bi-arrow-repeat"></i>
-                            <span>Transaksi</span>
-                        </a>
-                        <ul class="submenu ">
-                            <li class="submenu-item  ">
-                                <a href="{{ route('pinjams.index') }}" class="submenu-link">
-                                    <i class="bi bi-book-fill"></i>
-                                    <span> Peminjaman</span>
-                                </a>
-                            </li>
-                            <li class="submenu-item  ">
-                                <a href="{{ route('kembalis.index') }}" class="submenu-link">
-                                    <i class="bi bi-arrow-left-right"></i>
-                                    <span> Pengembalian</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    {{--  --}}
+
                     <li class="sidebar-item  has-sub">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-file-text-fill"></i>
@@ -133,32 +112,31 @@
                         </a>
                         <ul class="submenu ">
                             <li class="submenu-item  ">
-                                <a href="" class="submenu-link">
+                                <a href="{{ route('anggotas') }}" class="submenu-link" target="blank">
                                     <span> Lap. Anggota</span>
                                 </a>
                             </li>
 
                             <li class="submenu-item  ">
-                                <a href="" class="submenu-link">
+                                <a href="{{ route('koleksis') }}" class="submenu-link" target="blank">
                                     <span> Lap. Koleksi</span>
                                 </a>
                             </li>
 
                             <li class="submenu-item  ">
-                                <a href="{{ route('reports') }}" class="submenu-link" target="blank">
+                                <a href="{{ route('users') }}" class="submenu-link" target="blank">
                                     <span> Lap. Users</span>
                                 </a>
                             </li>
 
                             <li class="submenu-item  ">
-                                <a href="" class="submenu-link">
-
+                                <a href="{{ route('peminjaman') }}" class="submenu-link" target="blank">
                                     <span> Lap. Peminjaman</span>
                                 </a>
                             </li>
 
                             <li class="submenu-item  ">
-                                <a href="" class="submenu-link">
+                                <a href="{{ route('pengembalian') }}" class="submenu-link" target="blank">
 
                                     <span> Lap. Pengembalian</span>
                                 </a>

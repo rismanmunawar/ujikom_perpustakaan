@@ -18,14 +18,12 @@ class AnggotaController extends Controller
     {
         $nm_pengguna = $this->currentUser->nm_pengguna;
         $title = "Anggota";
-        // Dapatkan kode anggota berikutnya
         $lastKode = Anggota::orderBy('kd_anggota', 'desc')->first();
-        $nextKode = 'KA001'; // Default kode jika tidak ada data anggota
-        // Jika ada kode sebelumnya, buat kode berikutnya
+        $nextKode = 'KA001';
         if ($lastKode) {
-            $lastNumber = intval(substr($lastKode->kd_anggota, 2)); // Ambil angka dari kode sebelumnya
-            $nextNumber = $lastNumber + 1; // Tambahkan 1 ke angka tersebut
-            $nextKode = 'KA' . sprintf('%03d', $nextNumber); // Format ulang kode
+            $lastNumber = intval(substr($lastKode->kd_anggota, 2));
+            $nextNumber = $lastNumber + 1;
+            $nextKode = 'KA' . sprintf('%03d', $nextNumber);
         }
 
         return view('anggota/create', compact('title', 'nextKode', 'nm_pengguna'));
@@ -44,22 +42,15 @@ class AnggotaController extends Controller
             'jml_pjm' => 'required',
         ]);
 
-        // Dapatkan kode anggota terakhir dari database
         $lastKode = Anggota::orderBy('kd_anggota', 'desc')->first();
-
-        // Default kode jika tidak ada data anggota
         $nextKode = 'KA001';
-
-        // Jika ada kode sebelumnya, buat kode berikutnya
         if ($lastKode) {
             $lastNumber = intval(substr($lastKode->kd_anggota, 2)); // Ambil angka dari kode sebelumnya
             $nextNumber = $lastNumber + 1; // Tambahkan 1 ke angka tersebut
             $nextKode = 'KA' . sprintf('%03d', $nextNumber); // Format ulang kode
         }
-
         // Tambahkan kode anggota ke dalam data request
         $request->merge(['kd_anggota' => $nextKode]);
-
         // Proses penyimpanan data jika validasi berhasil
         Anggota::create($request->all());
 

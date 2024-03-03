@@ -45,8 +45,8 @@
                                         <td>{{ $row->alamat }}</td>
                                         <td>{{ $row->no_hp }}</td>
                                         <td>{{ $row->jns_anggota }}</td>
-                                        <td>{{ $row->jml_pjm }}</td>
                                         <td>{{ $row->status }}</td>
+                                        <td>{{ $row->jml_pjm }}</td>
                                         <td>
                                             <a href="{{ route('anggotas.edit', $row->id) }}"
                                                 class="btn btn-sm btn-warning">

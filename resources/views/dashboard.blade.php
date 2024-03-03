@@ -13,8 +13,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Jumlah Anggota</h6>
-                                    <h6 class="font-extrabold mb-0">112.000</h6>
+                                    <h6 class="text-muted font-semibold">Jumlah Users</h6>
+                                    @if (isset($totalUsers))
+                                        <h6 class="font-extrabold mb-0">{{ $totalUsers }}</h6>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -30,8 +32,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                    <h6 class="text-muted font-semibold">Jumlah Anggota</h6>
-                                    <h6 class="font-extrabold mb-0">183.000</h6>
+                                    <h6 class="text-muted font-semibold">Jumlah Kembali</h6>
+                                    @if (isset($totalKembali))
+                                        <h6 class="font-extrabold mb-0">{{ $totalKembali }}</h6>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -48,7 +52,9 @@
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Jumlah Peminjaman</h6>
-                                    <h6 class="font-extrabold mb-0">80.000</h6>
+                                    @if (isset($totalPinjam))
+                                        <h6 class="font-extrabold mb-0">{{ $totalPinjam }}</h6>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -65,7 +71,9 @@
                                 </div>
                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                     <h6 class="text-muted font-semibold">Jumlah Koleksi</h6>
-                                    <h6 class="font-extrabold mb-0">112</h6>
+                                    @if (isset($totalKoleksi))
+                                        <h6 class="font-extrabold mb-0">{{ $totalKoleksi }}</h6>
+                                    @endif
                                 </div>
                             </div>
                         </div>
